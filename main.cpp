@@ -2,41 +2,7 @@
 #include <fstream>
 #include <cstdlib>
 #include <string>
-
-void freeMatrix(int ** m, size_t rows)
-{
-  if (m == nullptr)
-  {
-    return;
-  }
-  for (size_t i = 0; i < rows; ++i)
-  {
-    delete [] m[i];
-  }
-  delete [] m;
-}
-
-int ** createMatrix(size_t rows, size_t cols)
-{
-  int ** rowsptrs = new int *[rows];
-  for (size_t i = 0; i < rows; ++i)
-  {
-    rowsptrs[i] = nullptr;
-  }
-  try
-  {
-    for (size_t i = 0; i < rows; ++i)
-    {
-      rowsptrs[i] = new int[cols];
-    }
-    return rowsptrs;
-  }
-  catch (const std::bad_alloc &)
-  {
-    freeMatrix(rowsptrs, rows);
-    throw;
-  }
-}
+#include "matrix.hpp"
 
 std::istream & inputArray(std::istream & in, int * a, size_t s, size_t toread, size_t & read)
 {
@@ -60,6 +26,7 @@ size_t inputArray(std::istream & in, int * a, size_t s, size_t toread)
 
 int main(int argc, char * argv[])
 {
+  using namespace kasilov;
   for (int i = 0; i < argc; ++i)
   {
     std::cout << argv[i] << "\n";
