@@ -34,6 +34,15 @@ int main(int argc, char * argv[])
   }
 
   //argv[2] - имя файла с матрицей
+  if (num > 2)
+  {
+    return 2;
+  }
+  if (num == 1)
+  {
+    //skip here
+    return 0;
+  }
   size_t rows = 0, cols = 0;
   {
     std::ifstream input(argv[2]);
@@ -48,6 +57,7 @@ int main(int argc, char * argv[])
   size_t result = inputArray(std::cin, matrix, rows * cols, rows * cols);
   if (!std::cin)
   {
+    std::cerr << "Read " << result << " elements...\n";
     delete [] matrix;
     return 3;
   }

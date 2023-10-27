@@ -1,4 +1,6 @@
 #include "input_array.hpp"
+#include <algorithm>
+#include <iostream>
 
 std::istream & kasilov::inputArray(std::istream & in, int * a, size_t s, size_t toread, size_t & read)
 {
@@ -19,4 +21,3 @@ size_t kasilov::inputArray(std::istream & in, int * a, size_t s, size_t toread)
   inputArray(in, a, s, toread, read);
   return read;
 }
-
