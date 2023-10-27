@@ -1,28 +1,8 @@
 #include <iostream>
 #include <fstream>
-#include <cstdlib>
 #include <string>
 #include "matrix.hpp"
-
-std::istream & inputArray(std::istream & in, int * a, size_t s, size_t toread, size_t & read)
-{
-  for (size_t i = 0; i < std::min(toread, s); ++i)
-  {
-    if (!(in >> a[i]))
-    {
-      read = i;
-      return in;
-    }
-  }
-  read = std::min(toread, s);
-  return in;
-}
-size_t inputArray(std::istream & in, int * a, size_t s, size_t toread)
-{
-  size_t read = 0;
-  inputArray(in, a, s, toread, read);
-  return read;
-}
+#include "input_array.hpp"
 
 int main(int argc, char * argv[])
 {
@@ -72,23 +52,28 @@ int main(int argc, char * argv[])
     return 3;
   }
 
-  int ** rowsptrs = nullptr;
-  int ** rowsptrs2 = nullptr;
+  int ** m1 = nullptr;
+  int ** m2 = nullptr;
   try
   {
+    m1 = createMatrix(rows, cols);
+    m2 = createMatrix(rows, cols);
     //...
-    freeMatrix(rowsptrs, rows);
-    freeMatrix(rowsptrs2, rows);
+    freeMatrix(m1, rows, cols);
+    freeMatrix(m2, rows, cols);
   }
   catch (...)
   {
     delete [] matrix;
-    freeMatrix(rowsptrs, rows);
-    freeMatrix(rowsptrs2, rows);
-    std::cerr << "Not enough memory\n";
+    freeMatrix(m1, rows, cols);
+    freeMatrix(m2, rows, cols);
     return 4;
   }
   delete[] matrix;
-  //int * matrix = new int[cols * rows];
-  //delete [] matrix;
+
+  {
+    std::fstream output(argv[4]);
+    output << rows << " " << cols << "\n";
+  }
+  return 0;
 }

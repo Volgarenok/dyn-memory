@@ -1,5 +1,6 @@
 #include "matrix.hpp"
 #include <memory>
+
 void kasilov::freeMatrix(int ** m, size_t rows)
 {
   if (!m)
@@ -12,6 +13,7 @@ void kasilov::freeMatrix(int ** m, size_t rows)
   }
   delete [] m;
 }
+
 void kasilov::freeMatrix(int ** m, size_t rows, size_t)
 {
   freeMatrix(m, rows);
@@ -38,4 +40,3 @@ int ** kasilov::createMatrix(size_t rows, size_t cols)
     throw;
   }
 }
-
